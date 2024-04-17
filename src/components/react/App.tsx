@@ -171,7 +171,7 @@ export default function App({ boardId }: { boardId: string }) {
 
             {
                 state.showModal && <section className={`fixed h-screen bg-[#00000033] w-full top-0 left-0`} >
-                    <div className={`fixed transition-[right]  ease-in-out delay-700 ${state.showModal ? 'right-4' : 'right-[-1000px]'} top-4 bottom-4 p-4 h-[95vh] rounded-lg bg-[#FFFFFF] ${window.innerWidth>=640?'w-5/12':'w-[calc(100%-2rem)]' }`}>
+                    <div className={`fixed overflow-y-auto transition-[right] ease-in-out delay-700 ${state.showModal ? 'right-4' : 'right-[-1000px]'} top-4 bottom-8 p-4 h-[95vh] rounded-lg bg-[#FFFFFF] ${window.innerWidth>=640?'w-5/12':'w-[calc(100%-2rem)]' }`}>
                         <h1 className='font-semibold text-lg flex items-center justify-between'> Task details<span className='p-1 border rounded-md cursor-pointer' onClick={() => dispatch({ type: 'HIDE_FORM', payload: { showModal: false } })}><CloseRing bgColor='#F7D4D3' iconColor='#DD524C' /></span></h1>
                         <form onSubmit={handleOnSubmit}>
                             <fieldset className='mt-4'>
