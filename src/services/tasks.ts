@@ -19,13 +19,14 @@ export async function requestGetTasks({ boardId }: { boardId: string }) {
 
 
 export async function requestUpsertTasks({ upsert, sendTask }: { upsert: string, sendTask: ITask }) {
+    console.log(upsert,sendTask)
     return fetch('/api/task', {
         method: upsert == 'create' ? 'POST' : 'PUT',
         body: JSON.stringify(sendTask)
     }).then(res => {
         if (!res.ok) {
-            toast.error("There was a problem creating/updating the task")
             throw new Error("There was a problem creating/updating the task")
+            return
         };
 
         return res.json()
