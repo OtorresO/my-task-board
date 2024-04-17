@@ -33,4 +33,5 @@ export const initialTask: ITask = {
     icon_id: 1,
     code: 0,
     icon: '',
+    board_id:0
 }

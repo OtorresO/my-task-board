@@ -5,7 +5,7 @@ export const POST: APIRoute = async ({ params, request }) => {
     try {
         const data = await request.json()
         const listStatus = await sql`select id,name,code from status_task`
-        const tasks = await sql`SELECT tk.id,tk.name, tk.description, tk.icon_id,ic.value as icon, st.code,tk.status_id FROM tasks AS tk 
+        const tasks = await sql`SELECT tk.id,tk.name, tk.description, tk.icon_id,ic.value as icon, st.code,tk.status_id,tk.board_id FROM tasks AS tk 
         JOIN status_task AS st ON tk.status_id = st.id 
         JOIN icons as ic ON tk.icon_id=ic.id
         JOIN boards AS bd ON tk.board_id = bd.id
