@@ -6,7 +6,7 @@ import TrashIcon from './icons/TrashIcon';
 import EditIcon from './icons/EditIcon';
 import CloseRing from './icons/CloseRing';
 import { Toaster, toast } from 'sonner'
-import { type IStatus, type IIcon, type ITask } from '../../interfaces/intarfeces'
+import { type ITask } from '../../interfaces/intarfeces'
 import Task from './Task';
 import { initialTask } from '../../constants/FrontendConstants'
 import Icon from './Icon';
@@ -57,7 +57,7 @@ export default function App({ boardId }: { boardId: string }) {
         const sendTask = { ...state.task, board_id: state.upsert == 'create' ? boardId : state.task.board_id, id: state.upsert == 'create' ? '0' : state.task!.id.toString() }
 
         requestUpsertTasks({ upsert: state.upsert, sendTask }).then((data) => {
-            fetchData()
+            
             dispatch({
                 type: 'UPSERT_TASK',
                 payload: {
@@ -67,6 +67,7 @@ export default function App({ boardId }: { boardId: string }) {
                 }
             })
             toast.success(data.message)
+            fetchData()
         })
     };
     const deleteTask = (id: (number | string)) => {
@@ -142,7 +143,7 @@ export default function App({ boardId }: { boardId: string }) {
 
 
     return (
-        <main className='min-h-screen  h-screen  mx-[400px] mt-[60px] '>
+        <main className='min-h-screen  h-screen  xl:mx-[400px] lg:mx-[300px] mx-[50px] mt-[60px] '>
             <h1 className='flex text-4xl gap-2'><Logo /> <span>My Task Board </span><EditIcon /></h1>
             <p className='ms-12 mt-4 mb-9'>Tasks to keep organised</p>
             <section className='flex flex-col gap-4 mb-[80px]'>
@@ -152,6 +153,7 @@ export default function App({ boardId }: { boardId: string }) {
                             (state.tasks.length > 0 ?
                                 state.tasks.map(task => (
                                     <Task
+                                        key={crypto.randomUUID()}
                                         task={task}
                                         displayTask={displayTask}
                                     />
@@ -169,7 +171,7 @@ export default function App({ boardId }: { boardId: string }) {
 
             {
                 state.showModal && <section className={`fixed h-screen bg-[#00000033] w-full top-0 left-0`} >
-                    <div className={`fixed transition-[right] ease-in-out delay-700 ${state.showModal ? 'right-4' : 'right-[-1000px]'} top-4 bottom-4 p-4 h-[95vh] rounded-lg bg-[#FFFFFF] w-5/12`}>
+                    <div className={`fixed transition-[right]  ease-in-out delay-700 ${state.showModal ? 'right-4' : 'right-[-1000px]'} top-4 bottom-4 p-4 h-[95vh] rounded-lg bg-[#FFFFFF] ${window.innerWidth>=640?'w-5/12':'w-[calc(100%-2rem)]' }`}>
                         <h1 className='font-semibold text-lg flex items-center justify-between'> Task details<span className='p-1 border rounded-md cursor-pointer' onClick={() => dispatch({ type: 'HIDE_FORM', payload: { showModal: false } })}><CloseRing bgColor='#F7D4D3' iconColor='#DD524C' /></span></h1>
                         <form onSubmit={handleOnSubmit}>
                             <fieldset className='mt-4'>
@@ -202,6 +204,7 @@ export default function App({ boardId }: { boardId: string }) {
                                     {
                                         state.icons.map((icon, index) => (
                                             <Icon
+                                            key={crypto.randomUUID()}
                                                 task={state.task}
                                                 icon={icon}
                                                 updateIcon={updateIconTask}
@@ -221,6 +224,7 @@ export default function App({ boardId }: { boardId: string }) {
                                     {
                                         state.listStatus.map((status, index) => (
                                             <Status
+                                                key={crypto.randomUUID()}
                                                 status={status}
                                                 task={state.task}
                                                 updateStatus={updateStatusTask}
