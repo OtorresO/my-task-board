@@ -1,0 +1,13 @@
+---
+import App from "../../components/react/App";
+import Layout from "../../layouts/Layout.astro";
+
+const id = Astro.params.id;
+
+---
+
+<Layout title="My task board">
+	<App client:load boardId={id ?? ""} />
+</Layout>
+
+<style></style>

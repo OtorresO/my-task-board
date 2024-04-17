@@ -1,0 +1,24 @@
+---
+import { getTask } from "../db/TaskSeed"
+import sql from "../db/connection"
+
+
+try {
+        const cookieBoardId = Astro.cookies.get('board_id');
+        if(cookieBoardId){
+            const boardId = cookieBoardId.value
+            return Astro.redirect(`/board/${boardId}`)
+        }
+        const board = await sql`INSERT INTO boards (created_at) VALUES (current_timestamp) returning id`
+        if (board.count == 0) return Astro.redirect('/error')
+        const boardId = board[0].id
+        const taskSeed = getTask(boardId)
+        const insertTasksToBoard = await sql`insert into tasks ${ sql(taskSeed) }` 
+        if (insertTasksToBoard.count == 0) return Astro.redirect('/error')
+        Astro.cookies.set('board_id',boardId)
+        return Astro.redirect(`/board/${boardId}`)
+    } catch (error) {
+        return Astro.redirect('/error')
+    }
+---
+
