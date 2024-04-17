@@ -8,9 +8,6 @@ import vercel from "@astrojs/vercel/serverless";
 export default defineConfig({
   integrations: [tailwind(), react()],
   output: 'server',
-  pages: [{
-    path: '/',
-    component: './src/pages/board/[:id].astro'
-  }],
+  
   adapter: vercel()
 });
