@@ -34,7 +34,7 @@ export function tasksReducer(state: AppState, action: TasksAction): AppState {
         case 'UPDATE_NAME_TASK':
             return { ...state, task: { ...state.task, name: action.payload.name } }
         case 'UPDATE_DESCRIPTION_TASK':
-            return { ...state, task: { ...state.task, name: action.payload.description } }
+            return { ...state, task: { ...state.task, description: action.payload.description } }
         case 'UPDATE_STATUS_TASK':
             return { ...state, task: { ...state.task, status_id: action.payload.status_id } }
         case 'DISPLAY_FORM':
