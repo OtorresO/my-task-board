@@ -1,6 +1,6 @@
 # MY TASK BOARD
 
-(![image](https://github.com/OtorresO/my-task-board/assets/161916689/bfb2f906-ac3f-48cd-8de1-573e0c461ec7)
+![image](https://github.com/OtorresO/my-task-board/assets/161916689/bfb2f906-ac3f-48cd-8de1-573e0c461ec7)
 
 
 ## WHAT TECHNOLOGIES DO I USE?
